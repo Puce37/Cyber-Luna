@@ -1,27 +1,42 @@
-/* ===== Base ===== */
+/* =======================================================
+   BASE
+======================================================= */
+
 body {
   font-family: 'Orbitron', sans-serif;
+
   margin: 0;
   min-height: 100vh;
-  overflow: hidden;
+
+  overflow-x: hidden;
+  overflow-y: auto;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
+  padding: 40px 20px;
+
   background:
     radial-gradient(circle at top, rgba(140, 0, 255, 0.15), transparent 40%),
     radial-gradient(circle at bottom, rgba(0, 200, 255, 0.12), transparent 40%),
-    linear-gradient(135deg, #050510, #090916 40%, #020205);
+    linear-gradient(135deg, #050510, #090916 45%, #020205);
 
   color: #d8f6ff;
+
   position: relative;
+
+  text-align: center;
 }
 
-/* ===== Grille futuriste ===== */
+/* =======================================================
+   CYBER GRID
+======================================================= */
+
 body::before {
   content: "";
+
   position: fixed;
   inset: 0;
 
@@ -32,6 +47,7 @@ body::before {
   background-size: 40px 40px;
 
   mask-image: radial-gradient(circle at center, black 30%, transparent 90%);
+
   pointer-events: none;
 
   animation: gridMove 12s linear infinite;
@@ -41,128 +57,350 @@ body::before {
   from {
     transform: translateY(0px);
   }
+
   to {
     transform: translateY(40px);
   }
 }
 
-/* ===== Glow ambiance ===== */
+/* =======================================================
+   AMBIENT GLOW
+======================================================= */
+
 body::after {
   content: "";
+
   position: fixed;
+
   width: 700px;
   height: 700px;
-  background: radial-gradient(circle, rgba(0,255,255,0.08), transparent 70%);
+
   top: 50%;
   left: 50%;
+
   transform: translate(-50%, -50%);
-  filter: blur(50px);
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(0,255,255,0.08),
+      rgba(157,77,255,0.06),
+      transparent 70%
+    );
+
+  filter: blur(60px);
+
   pointer-events: none;
 }
 
-/* ===== Titre ===== */
+/* =======================================================
+   TITLE
+======================================================= */
+
 h1 {
+  position: relative;
+  z-index: 1;
+
   font-size: 4.5rem;
+
   text-transform: uppercase;
   letter-spacing: 0.2em;
-  margin-bottom: 60px;
 
-  background: linear-gradient(90deg, #00e5ff, #9d4dff, #00e5ff);
+  margin-bottom: 50px;
+
+  background: linear-gradient(
+    90deg,
+    #00e5ff,
+    #9d4dff,
+    #00e5ff
+  );
+
   background-size: 300%;
 
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 
-  animation: glowText 5s linear infinite;
+  animation: glowText 6s linear infinite;
 
   text-shadow:
-    0 0 10px rgba(0,255,255,0.5),
-    0 0 20px rgba(157,77,255,0.5);
+    0 0 12px rgba(0,255,255,0.45),
+    0 0 25px rgba(157,77,255,0.35);
 }
 
 @keyframes glowText {
-  0% { background-position: 0%; }
-  100% { background-position: 300%; }
+  0% {
+    background-position: 0%;
+  }
+
+  100% {
+    background-position: 300%;
+  }
 }
+
+/* =======================================================
+   LABELS
+======================================================= */
 
 label {
-  font-size: 1.5rem;
-  margin-bottom: 20px;
-  display: block;
-  cursor: pointer;
-  user-select: none;
-}
+  position: relative;
+  z-index: 1;
 
-input[type="checkbox"] {
-  transform: scale(1.5);
-  margin-right: 10px;
-  vertical-align: middle;
-  cursor: pointer;
-}
+  display: flex;
+  align-items: center;
+  gap: 14px;
 
-/* Boutons style commun */
-.btn {
-  padding: 15px 30px;
+  margin: 16px 0;
+
+  padding: 16px 24px;
+
+  border-radius: 18px;
+
+  background: rgba(255,255,255,0.05);
+
+  border: 1px solid rgba(0,255,255,0.14);
+
+  backdrop-filter: blur(12px);
+
+  color: #dffcff;
+
   font-size: 1.2rem;
   font-weight: 700;
-  color: #00f0ff;
-  background: linear-gradient(145deg, #0a2a5f, #003080);
-  border: 2px solid #00f0ff;
-  border-radius: 12px;
+
+  letter-spacing: 0.05em;
+
   cursor: pointer;
+
+  transition: 0.3s ease;
+
   box-shadow:
-    0 0 6px #00bfff,
-    inset 0 0 8px #0077cc;
-  transition: all 0.3s ease;
+    0 0 18px rgba(0,255,255,0.08);
+}
+
+label:hover {
+  transform: translateY(-3px);
+
+  border-color: rgba(0,255,255,0.35);
+
+  box-shadow:
+    0 0 20px rgba(0,229,255,0.2),
+    0 0 50px rgba(157,77,255,0.1);
+}
+
+/* =======================================================
+   CHECKBOX
+======================================================= */
+
+input[type="checkbox"] {
+  appearance: none;
+
+  width: 24px;
+  height: 24px;
+
+  border-radius: 8px;
+
+  border: 2px solid #00e5ff;
+
+  background: rgba(255,255,255,0.04);
+
+  cursor: pointer;
+
+  position: relative;
+
+  transition: 0.3s ease;
+
+  box-shadow:
+    0 0 10px rgba(0,229,255,0.18);
+}
+
+input[type="checkbox"]:checked {
+  background: #00e5ff;
+
+  box-shadow:
+    0 0 15px rgba(0,229,255,0.6),
+    0 0 35px rgba(0,229,255,0.3);
+}
+
+input[type="checkbox"]:checked::before {
+  content: "✓";
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
+  color: black;
+
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+/* =======================================================
+   BUTTONS
+======================================================= */
+
+.btn {
+  position: relative;
+  z-index: 1;
+
+  overflow: hidden;
+
+  margin: 14px auto;
+
+  min-width: 240px;
+
+  padding: 16px 40px;
+
+  border-radius: 18px;
+
+  border: 1px solid rgba(0,255,255,0.22);
+
+  background: rgba(255,255,255,0.05);
+
+  backdrop-filter: blur(12px);
+
+  color: #dffcff;
+
+  font-size: 1.1rem;
+  font-weight: 700;
+
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  user-select: none;
-  outline: none;
-  margin: 10px auto;
-  display: inline-block;
-  min-width: 200px;
+
+  cursor: pointer;
+
+  transition: 0.35s ease;
+
+  box-shadow:
+    0 0 18px rgba(0,255,255,0.08),
+    inset 0 0 12px rgba(255,255,255,0.03);
+}
+
+/* Shine effect */
+
+.btn::before {
+  content: "";
+
+  position: absolute;
+  top: 0;
+  left: -130%;
+
+  width: 80%;
+  height: 100%;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,0.18),
+    transparent
+  );
+
+  transform: skewX(-20deg);
+
+  transition: 0.8s;
+}
+
+.btn:hover::before {
+  left: 150%;
 }
 
 .btn:hover {
-  color: #ffffff;
-  background: linear-gradient(145deg, #005eff, #00ffff);
+  transform: translateY(-4px);
+
+  background: rgba(0,255,255,0.08);
+
+  border-color: #00e5ff;
+
   box-shadow:
-    0 0 12px #00ffff,
-    0 0 30px #00ffff,
-    inset 0 0 20px #00ffff;
-  transform: translateY(-3px);
+    0 0 20px rgba(0,229,255,0.4),
+    0 0 60px rgba(157,77,255,0.15);
 }
 
 .btn:active {
-  transform: translateY(1px);
-  box-shadow:
-    0 0 6px #00c6ff,
-    inset 0 0 10px #00c6ff;
+  transform: scale(0.97);
 }
 
-/* Boutons spécifiques */
+/* =======================================================
+   RESET BUTTON
+======================================================= */
+
 #reset-btn {
-  background: darkred;
-  border-color: red;
-  box-shadow: 0 0 8px red;
-  margin-top: 40px;
-  min-width: 250px;
+  margin-top: 45px;
+
+  border: 1px solid rgba(255,70,70,0.35);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,40,40,0.12),
+      rgba(80,0,0,0.25)
+    );
+
+  box-shadow:
+    0 0 20px rgba(255,70,70,0.14);
 }
 
 #reset-btn:hover {
-  background: crimson;
-  box-shadow: 0 0 15px red, 0 0 30px red;
+  box-shadow:
+    0 0 24px rgba(255,70,70,0.45),
+    0 0 60px rgba(255,70,70,0.18);
 }
 
+/* =======================================================
+   MULTIPLIER BUTTON
+======================================================= */
+
 #show-multiplier-btn {
-  margin-top: 10px;
-  background: #004400;
-  border-color: #00ff00;
-  box-shadow: 0 0 8px #00ff00;
-  min-width: 250px;
+  border: 1px solid rgba(0,255,180,0.35);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(0,255,180,0.12),
+      rgba(0,70,55,0.25)
+    );
+
+  box-shadow:
+    0 0 20px rgba(0,255,180,0.14);
 }
 
 #show-multiplier-btn:hover {
-  background: #00aa00;
-  box-shadow: 0 0 15px #00ff00, 0 0 30px #00ff00;
+  box-shadow:
+    0 0 24px rgba(0,255,180,0.45),
+    0 0 60px rgba(0,255,180,0.18);
+}
+
+/* =======================================================
+   SCROLLBAR
+======================================================= */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0,0,0,0.4);
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 20px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #00e5ff,
+      #9d4dff
+    );
+
+  box-shadow:
+    0 0 10px rgba(0,229,255,0.4);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background:
+    linear-gradient(
+      180deg,
+      #00ffff,
+      #c06cff
+    );
 }

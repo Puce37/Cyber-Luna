@@ -150,13 +150,18 @@ h1 {
 ======================================================= */
 
 .character-select {
-  display: flex;
-  gap: 25px;
+  display: grid;
 
-  margin-bottom: 45px;
+  /* 3 cases max par ligne */
+  grid-template-columns: repeat(3, 340px);
 
-  flex-wrap: wrap;
   justify-content: center;
+
+  gap: 30px;
+
+  width: 100%;
+
+  margin-bottom: 50px;
 }
 
 /* =======================================================
